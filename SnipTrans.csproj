@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <AssemblyName>SnipTrans</AssemblyName>
+    <RootNamespace>SnipTrans</RootNamespace>
+    <!-- 图标是二进制文件，可由 tools/gen-icon.ps1 + pack-ico.py 生成；缺失时不影响编译 -->
+    <ApplicationIcon Condition="Exists('app.ico')">app.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>SnipTrans 截图翻译</Product>
+    <AssemblyTitle>SnipTrans 截图翻译</AssemblyTitle>
+    <Version>1.0.0</Version>
+    <SatelliteResourceLanguages>zh-Hans;en</SatelliteResourceLanguages>
+    <!-- WPF 需要 app.manifest 中的 PerMonitorV2；关掉 WinForms 分析器的 DPI 迁移建议 -->
+    <NoWarn>$(NoWarn);WFAC010</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="app.ico" Condition="Exists('app.ico')" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- tools/ 下是独立的测试工具与图标脚本，不能被主项目当成源码编译 -->
+    <Compile Remove="tools/**" />
+    <Page Remove="tools/**" />
+    <ApplicationDefinition Remove="tools/**" />
+    <None Remove="tools/**" />
+    <EmbeddedResource Remove="tools/**" />
+  </ItemGroup>
+
+</Project>

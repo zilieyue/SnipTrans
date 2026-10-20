@@ -1,0 +1,92 @@
+<Window x:Class="SnipTrans.Views.ResultWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SnipTrans"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        SizeToContent="Height"
+        Width="470"
+        ResizeMode="NoResize"
+        WindowStartupLocation="Manual"
+        FontFamily="Microsoft YaHei UI, Segoe UI"
+        UseLayoutRounding="True"
+        TextOptions.TextFormattingMode="Display"
+        Opacity="0">
+
+    <Grid Margin="18">
+        <Border x:Name="Root"
+                CornerRadius="14"
+                Background="#F216181F"
+                BorderBrush="#3AFFFFFF"
+                BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="26" ShadowDepth="7" Direction="270"
+                                  Color="#000000" Opacity="0.5"/>
+            </Border.Effect>
+
+            <Grid Margin="18,13,18,13">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 顶部：方向 / 引擎 / 耗时 -->
+                <Grid Grid.Row="0" Margin="0,0,0,9">
+                    <Rectangle Width="3" Height="13" RadiusX="1.5" RadiusY="1.5"
+                               Fill="#4C8DFF" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="MetaText"
+                               Margin="10,0,28,0" FontSize="11" Foreground="#8B93A1"
+                               VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                    <Button x:Name="CloseButton" Content="✕"
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Width="20" Height="20" FontSize="10"
+                            Foreground="#7A8494" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" ToolTip="关闭 (Esc)">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="Bg" Background="Transparent" CornerRadius="4">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bg" Property="Background" Value="#2AFFFFFF"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <!-- 原文（可关闭显示） -->
+                <ScrollViewer x:Name="OriginalScroll" Grid.Row="1" MaxHeight="92"
+                              VerticalScrollBarVisibility="Auto" Margin="0,0,0,9">
+                    <TextBlock x:Name="OriginalText" FontSize="11.5" Foreground="#939CAB"
+                               TextWrapping="Wrap" LineHeight="17"/>
+                </ScrollViewer>
+
+                <Border x:Name="Divider" Grid.Row="2" Height="1" Background="#26FFFFFF"
+                        Margin="0,0,0,10"/>
+
+                <!-- 译文 -->
+                <ScrollViewer Grid.Row="3" MaxHeight="310" VerticalScrollBarVisibility="Auto">
+                    <TextBlock x:Name="TranslatedText" FontSize="14.5" Foreground="#F3F5F9"
+                               TextWrapping="Wrap" LineHeight="23"/>
+                </ScrollViewer>
+
+                <!-- 底部提示 -->
+                <Grid Grid.Row="4" Margin="0,11,0,0">
+                    <TextBlock x:Name="HintText" FontSize="10.5" Foreground="#6B7382"
+                               Text="Esc 关闭 · 点击译文复制"/>
+                    <TextBlock x:Name="ToastText" FontSize="10.5" Foreground="#67D08B"
+                               HorizontalAlignment="Right" Opacity="0"/>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

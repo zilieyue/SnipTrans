@@ -1,0 +1,15 @@
+# 构建产物
+bin/
+obj/
+dist/
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+*.DotSettings.user
+
+# 日志与本地配置
+*.log
+settings.json
